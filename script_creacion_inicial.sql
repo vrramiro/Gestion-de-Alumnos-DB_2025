@@ -8,7 +8,6 @@ GO
 
 -- Dropear tablas del esquema
 IF OBJECT_ID('DB_2025.Respuesta', 'U') IS NOT NULL DROP TABLE DB_2025.Respuesta;
-IF OBJECT_ID('DB_2025.Observacion', 'U') IS NOT NULL DROP TABLE DB_2025.Observacion;
 IF OBJECT_ID('DB_2025.Pregunta', 'U')   IS NOT NULL DROP TABLE DB_2025.Pregunta;
 IF OBJECT_ID('DB_2025.Encuesta', 'U')   IS NOT NULL DROP TABLE DB_2025.Encuesta;
 
@@ -376,3 +375,60 @@ CREATE INDEX IX_Inscripcion_estado       ON DB_2025.Inscripcion(estado);
 CREATE INDEX IX_Curso_turno_curso        ON DB_2025.Curso(turno_curso);
 CREATE INDEX IX_Respuesta_id_pregunta    ON DB_2025.Respuesta(id_pregunta);
 CREATE INDEX IX_EvalFinal_id_profesor    ON DB_2025.Evaluacion_Final(id_profesor);
+GO
+
+----------------------
+------PROCEDURES------
+----------------------
+select * from gd_esquema.Maestra m where m.Sede_Provincia is null
+
+select * from gd_esquema.Maestra m where m.Profesor_Provincia is null
+
+select * from gd_esquema.Maestra m where m.Alumno_Provincia is null
+
+select * from gd_esquema.Maestra m where m.Sede_Provincia is null or m.Alumno_Provincia is null or m.Profesor_Provincia is null
+GO
+
+CREATE PROCEDURE DB_2025.migrar_provincias AS
+BEGIN TRANSACTION
+
+    INSERT INTO Provincia (provincia_nombre)
+    SELECT p.provincia
+    FROM (
+        SELECT DISTINCT m.Sede_Provincia as provincia
+        FROM gd_esquema.Maestra m
+        UNION
+        SELECT DISTINCT m.Alumno_Provincia as pronvincia
+        FROM gd_esquema.Maestra m
+        UNION
+        SELECT DISTINCT m.Profesor_Provincia as provincia
+        FROM gd_esquema.Maestra m
+    ) p
+    WHERE p.provincia IS NOT NULL
+
+COMMIT;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_localidad AS
+BEGIN TRANSACTION
+
+    INSERT INTO Localidad(nombre, provincia)
+    SELECT l.localidad, l.provincia
+    FROM (
+        SELECT m.Sede_Localidad as localidad, m.Sede_Provincia as provincia from gd_esquema.Maestra m
+        UNION
+        SELECT m.Alumno_Localidad as localidad, m.Alumno_Provincia as provincia from gd_esquema.Maestra m
+        UNION
+        SELECT m.Profesor_Localidad as localidad, m.Profesor_Provincia as provincia from gd_esquema.Maestra m
+    ) l
+    WHERE l.localidad IS NOT NULL AND l.provincia IS NOT NULL
+
+COMMIT;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_sede AS
+BEGIN TRANSACTION
+
+
+
+COMMIT
