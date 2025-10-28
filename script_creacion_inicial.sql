@@ -280,16 +280,9 @@ CREATE TABLE DB_2025.Encuesta (
     legajo_alumno  BIGINT,
     codigo_curso   BIGINT,
     fecha_registro DATETIME2(6),
+    observacion    VARCHAR(255) NULL,
     FOREIGN KEY (codigo_curso)  REFERENCES DB_2025.Curso(codigo_curso),
     FOREIGN KEY (legajo_alumno)  REFERENCES DB_2025.Alumno(legajo)
-);
-GO
-
-CREATE TABLE DB_2025.Observacion (
-    id_observacion BIGINT IDENTITY(1,1) PRIMARY KEY,
-    id_encuesta    BIGINT,
-    descripcion    VARCHAR(255),
-    FOREIGN KEY (id_encuesta) REFERENCES DB_2025.Encuesta(id_encuesta)
 );
 GO
 
@@ -372,7 +365,6 @@ CREATE INDEX IX_InsFinal_legajo_alumno        ON DB_2025.Inscripcion_Final(legaj
 -- Encuestas
 CREATE INDEX IX_Encuesta_legajo_alumno   ON DB_2025.Encuesta(legajo_alumno);
 CREATE INDEX IX_Encuesta_codigo_curso    ON DB_2025.Encuesta(codigo_curso);
-CREATE INDEX IX_Observacion_id_encuesta  ON DB_2025.Observacion(id_encuesta);
 CREATE INDEX IX_Respuesta_id_encuesta    ON DB_2025.Respuesta(id_encuesta);
 
 -- Facturación
