@@ -369,7 +369,7 @@ GO
 CREATE PROCEDURE DB_2025.migrar_provincia AS
 BEGIN TRANSACTION
 
-    INSERT INTO Provincia (provincia_nombre)
+    INSERT INTO DB_2025.Provincia (provincia_nombre)
     SELECT p.provincia
     FROM (
         SELECT DISTINCT m.Sede_Provincia as provincia
