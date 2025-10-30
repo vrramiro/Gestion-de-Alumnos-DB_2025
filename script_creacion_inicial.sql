@@ -2,68 +2,42 @@
 = = = = = = = =  0) LIMPIEZA / PREP DEL ESQUEMA  = = = = = =
 ========================================================= */
 
-IF OBJECT_ID('DB_2025.migrar_provincia', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_provincia;
+-- Dropeo de procedures
+IF OBJECT_ID('DB_2025.migrar_provincia', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_provincia;
+IF OBJECT_ID('DB_2025.migrar_localidad', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_localidad;
+IF OBJECT_ID('DB_2025.migrar_institucion', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_institucion;
+IF OBJECT_ID('DB_2025.migrar_sede', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_sede;
+IF OBJECT_ID('DB_2025.migrar_categoria', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_categoria;
+IF OBJECT_ID('DB_2025.migrar_turno', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_turno;
+IF OBJECT_ID('DB_2025.migrar_profesor', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_profesor;
+IF OBJECT_ID('DB_2025.migrar_alumno', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_alumno;
+IF OBJECT_ID('DB_2025.migrar_curso', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_curso;
+IF OBJECT_ID('DB_2025.migrar_dia', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_dia;
+IF OBJECT_ID('DB_2025.migrar_curso_dia', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_curso_dia;
+IF OBJECT_ID('DB_2025.migrar_modulo', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_modulo;
+IF OBJECT_ID('DB_2025.migrar_estado_inscripcion', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_estado_inscripcion;
+IF OBJECT_ID('DB_2025.migrar_inscripcion', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_inscripcion;
+IF OBJECT_ID('DB_2025.migrar_evaluacion', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_evaluacion;
+IF OBJECT_ID('DB_2025.migrar_trabajo_practico', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_trabajo_practico;
+IF OBJECT_ID('DB_2025.migrar_instancia_final', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_instancia_final;
+IF OBJECT_ID('DB_2025.migrar_evaluacion_final', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_evaluacion_final;
+IF OBJECT_ID('DB_2025.migrar_inscripcion_final', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_inscripcion_final;
+IF OBJECT_ID('DB_2025.migrar_pregunta', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_pregunta;
+IF OBJECT_ID('DB_2025.migrar_encuesta', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_encuesta;
+IF OBJECT_ID('DB_2025.migrar_respuesta', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_respuesta;
+IF OBJECT_ID('DB_2025.migrar_factura', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_factura;
+IF OBJECT_ID('DB_2025.migrar_detalle_factura', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_detalle_factura;
+IF OBJECT_ID('DB_2025.migrar_medio_pago', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_medio_pago;
+IF OBJECT_ID('DB_2025.migra_pago', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migra_pago;
 GO
 
-IF OBJECT_ID('DB_2025.migrar_localidad', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_localidad;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_institucion', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_institucion;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_sede', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_sede;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_categoria', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_categoria;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_turno', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_turno;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_profesor', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_profesor;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_alumno', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_alumno;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_curso', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_curso;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_dia', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_dia;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_curso_dia', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_curso_dia;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_modulo', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_modulo;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_estado_inscripcion', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_estado_inscripcion;
-GO
-
-IF OBJECT_ID('DB_2025.migrar_inscripcion', 'P') IS NOT NULL
-    DROP PROCEDURE DB_2025.migrar_inscripcion;
-GO
-
--- Dropear tablas del esquema
+-- Dropear de tablas
 IF OBJECT_ID('DB_2025.Respuesta', 'U') IS NOT NULL DROP TABLE DB_2025.Respuesta;
 IF OBJECT_ID('DB_2025.Pregunta', 'U')   IS NOT NULL DROP TABLE DB_2025.Pregunta;
 IF OBJECT_ID('DB_2025.Encuesta', 'U')   IS NOT NULL DROP TABLE DB_2025.Encuesta;
 
 IF OBJECT_ID('DB_2025.Pago', 'U')              IS NOT NULL DROP TABLE DB_2025.Pago;
+IF OBJECT_ID('DB_2025.Medio_Pago', 'U')        IS NOT NULL DROP TABLE DB_2025.Medio_Pago;
 IF OBJECT_ID('DB_2025.Detalle_Factura', 'U')   IS NOT NULL DROP TABLE DB_2025.Detalle_Factura;
 IF OBJECT_ID('DB_2025.Factura', 'U')           IS NOT NULL DROP TABLE DB_2025.Factura;
 
@@ -90,12 +64,12 @@ IF OBJECT_ID('DB_2025.Localidad', 'U')         IS NOT NULL DROP TABLE DB_2025.Lo
 IF OBJECT_ID('DB_2025.Provincia', 'U')         IS NOT NULL DROP TABLE DB_2025.Provincia;
 GO
 
--- 0.3) Dropear y recrear el esquema limpio
+-- Dropear y recrear el esquema limpio
 IF SCHEMA_ID('DB_2025') IS NULL
 BEGIN
     EXEC('CREATE SCHEMA DB_2025;');
 END
-
+GO
 
 /* =========================================================
 = = = = = = = =  1) UBICACIÓN / ACTORES / CATÁLOGOS  = = = =
@@ -327,12 +301,10 @@ GO
 
 CREATE TABLE DB_2025.Encuesta (
     id_encuesta    BIGINT IDENTITY(1,1) PRIMARY KEY,
-    legajo_alumno  BIGINT,
     codigo_curso   BIGINT,
     fecha_registro DATETIME2(6),
     observacion    VARCHAR(255) NULL,
-    FOREIGN KEY (codigo_curso)  REFERENCES DB_2025.Curso(codigo_curso),
-    FOREIGN KEY (legajo_alumno)  REFERENCES DB_2025.Alumno(legajo)
+    FOREIGN KEY (codigo_curso)  REFERENCES DB_2025.Curso(codigo_curso)
 );
 GO
 
@@ -356,8 +328,6 @@ CREATE TABLE DB_2025.Factura (
     numero_factura    BIGINT PRIMARY KEY,
     fecha_emision     DATETIME2(6),
     fecha_vencimiento DATETIME2(6),
-    anio              BIGINT,
-    mes               BIGINT,
     legajo_alumno     BIGINT,
     total             DECIMAL(18,2),
     FOREIGN KEY (legajo_alumno) REFERENCES DB_2025.Alumno(legajo)
@@ -366,7 +336,9 @@ GO
 
 CREATE TABLE DB_2025.Detalle_Factura (
     numero_factura BIGINT,
-    codigo_curso       BIGINT,
+    codigo_curso   BIGINT,
+    periodo_anio   BIGINT,
+    periodo_mes    BIGINT,
     importe        DECIMAL(18,2),
     PRIMARY KEY (numero_factura, codigo_curso),
     FOREIGN KEY (numero_factura) REFERENCES DB_2025.Factura(numero_factura),
@@ -374,13 +346,19 @@ CREATE TABLE DB_2025.Detalle_Factura (
 );
 GO
 
+CREATE TABLE DB_2025.Medio_Pago (
+    id_medio     BIGINT PRIMARY KEY IDENTITY(1, 1),
+    nombre_medio VARCHAR(255)
+)
+
 CREATE TABLE DB_2025.Pago (
-    id_pago        BIGINT PRIMARY KEY,
+    id_pago        BIGINT PRIMARY KEY IDENTITY(1, 1),
     numero_factura BIGINT,
     fecha          DATETIME2(6),
     importe        DECIMAL(18,2),
-    medio_pago     VARCHAR(255),
-    FOREIGN KEY (numero_factura) REFERENCES DB_2025.Factura(numero_factura)
+    medio_pago     BIGINT,
+    FOREIGN KEY (numero_factura) REFERENCES DB_2025.Factura(numero_factura),
+    FOREIGN KEY (medio_pago) REFERENCES DB_2025.Medio_Pago(id_medio)
 );
 GO
 
@@ -413,7 +391,6 @@ CREATE INDEX IX_InsFinal_id_instancia         ON DB_2025.Inscripcion_Final(id_in
 CREATE INDEX IX_InsFinal_legajo_alumno        ON DB_2025.Inscripcion_Final(legajo_alumno);
 
 -- Encuestas
-CREATE INDEX IX_Encuesta_legajo_alumno   ON DB_2025.Encuesta(legajo_alumno);
 CREATE INDEX IX_Encuesta_codigo_curso    ON DB_2025.Encuesta(codigo_curso);
 CREATE INDEX IX_Respuesta_id_encuesta    ON DB_2025.Respuesta(id_encuesta);
 
@@ -421,6 +398,7 @@ CREATE INDEX IX_Respuesta_id_encuesta    ON DB_2025.Respuesta(id_encuesta);
 CREATE INDEX IX_Factura_legajo_alumno    ON DB_2025.Factura(legajo_alumno);
 CREATE INDEX IX_DetalleFactura_codigo_curso  ON DB_2025.Detalle_Factura(codigo_curso);
 CREATE INDEX IX_Pago_numero_factura      ON DB_2025.Pago(numero_factura);
+CREATE INDEX IX_Pago_medio_pago          ON DB_2025.Pago(medio_pago)
 
 CREATE INDEX IX_Inscripcion_estado       ON DB_2025.Inscripcion(estado);
 CREATE INDEX IX_Curso_turno_curso        ON DB_2025.Curso(turno_curso);
@@ -441,7 +419,7 @@ BEGIN TRANSACTION
         SELECT DISTINCT m.Sede_Provincia as provincia
         FROM gd_esquema.Maestra m
         UNION
-        SELECT DISTINCT m.Alumno_Provincia as pronvincia
+        SELECT DISTINCT m.Alumno_Provincia as provincia
         FROM gd_esquema.Maestra m
         UNION
         SELECT DISTINCT m.Profesor_Provincia as provincia
@@ -453,9 +431,9 @@ COMMIT;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_localidad AS
-BEGIN TRANSACTION
+BEGIN
 
-    INSERT INTO Localidad(nombre, provincia)
+    INSERT INTO DB_2025.Localidad(nombre, provincia)
     SELECT l.localidad, l.provincia
     FROM (
         SELECT m.Sede_Localidad as localidad, m.Sede_Provincia as provincia from gd_esquema.Maestra m
@@ -466,13 +444,13 @@ BEGIN TRANSACTION
     ) l
     WHERE l.localidad IS NOT NULL AND l.provincia IS NOT NULL
 
-COMMIT;
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_institucion AS
-BEGIN TRANSACTION
+BEGIN
 
-    INSERT INTO Institucion (cuit, nombre, razon_social)
+    INSERT INTO DB_2025.Institucion (cuit, nombre, razon_social)
     SELECT
     DISTINCT m.Institucion_Cuit cuit,
     m.Institucion_Nombre nombre,
@@ -480,50 +458,50 @@ BEGIN TRANSACTION
     FROM gd_esquema.Maestra m
     WHERE m.Institucion_Cuit IS NOT NULL
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_sede AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Sede (cuit_institucion, nombre, direccion, codigo_localidad, telefono, mail)
     SELECT DISTINCT
     m.Institucion_Cuit AS cuit_institucion,
     m.Sede_Nombre AS nombre,
     m.Sede_Direccion AS direccion,
-    l.codigo_localidad AS numero,
+    l.codigo_localidad AS codigo_localidad,
     m.Sede_Telefono AS telefono,
     m.Sede_Mail AS mail
     FROM gd_esquema.Maestra m
     JOIN DB_2025.Localidad l on m.Sede_Provincia = l.provincia and m.Sede_Localidad = l.nombre
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_categoria AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Categoria (nombre_categoria)
     SELECT DISTINCT m.Curso_Categoria as nombre_categoria
     FROM gd_esquema.Maestra m
     WHERE m.Curso_Categoria IS NOT NULL
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_turno AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Turno (nombre)
     SELECT DISTINCT m.Curso_Turno as nombre
     FROM gd_esquema.Maestra m
     WHERE m.Curso_Turno IS NOT NULL
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_profesor AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Profesor (nombre, apellido, dni, fecha_nacimiento, mail, direccion, codigo_localidad, telefono)
     SELECT DISTINCT
@@ -538,11 +516,11 @@ BEGIN TRANSACTION
     FROM gd_esquema.Maestra m
     JOIN DB_2025.Localidad l ON m.Profesor_Localidad = l.nombre AND m.Profesor_Provincia = l.provincia
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_alumno AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Alumno (legajo, dni, nombre, apellido, fecha_nacimiento, mail, direccion, codigo_localidad, telefono)
     SELECT DISTINCT 
@@ -558,11 +536,11 @@ BEGIN TRANSACTION
     FROM gd_esquema.Maestra m
     JOIN DB_2025.Localidad l ON m.Alumno_Localidad = l.nombre AND m.Alumno_Provincia = l.provincia
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_curso AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Curso (codigo_curso, nombre, fecha_inicio, fecha_fin, duracion_meses, precio_mensual, profesor, categoria, sede, turno_curso, descripcion)
     SELECT DISTINCT 
@@ -583,11 +561,11 @@ BEGIN TRANSACTION
     JOIN DB_2025.Sede s ON s.cuit_institucion = m.Institucion_Cuit AND s.nombre = m.Sede_Nombre AND s.direccion = m.Sede_Direccion
     JOIN DB_2025.Turno t ON t.nombre = m.Curso_Turno
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_dia AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Dia (nombre_dia)
     SELECT DISTINCT
@@ -595,11 +573,11 @@ BEGIN TRANSACTION
     FROM gd_esquema.Maestra m
     WHERE m.Curso_Dia IS NOT NULL
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_curso_dia AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Curso_Dia (codigo_curso, dia)
     SELECT DISTINCT
@@ -609,11 +587,11 @@ BEGIN TRANSACTION
     JOIN gd_esquema.Maestra m ON m.Curso_Codigo = c.codigo_curso
     JOIN DB_2025.Dia d ON d.nombre_dia = m.Curso_Dia  
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_modulo AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Modulo (codigo_curso, nombre, descripcion)
     SELECT DISTINCT
@@ -624,11 +602,11 @@ BEGIN TRANSACTION
     JOIN gd_esquema.Maestra m on m.Curso_Codigo = c.codigo_curso
     WHERE m.Modulo_Nombre IS NOT NULL AND m.Modulo_Descripcion IS NOT NULL
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_estado_inscripcion AS
-BEGIN TRANSACTION
+BEGIN
 
     INSERT INTO DB_2025.Estado_Inscripcion (estado)
     SELECT DISTINCT 
@@ -636,11 +614,11 @@ BEGIN TRANSACTION
     FROM gd_esquema.Maestra m
     WHERE m.Inscripcion_Estado IS NOT NULL
 
-COMMIT
+END;
 GO
 
 CREATE PROCEDURE DB_2025.migrar_inscripcion AS
-BEGIN TRANSACTION
+BEGIN
 
   INSERT INTO DB_2025.Inscripcion (nro_inscripcion, legajo, codigo_curso, fecha_inscripcion, estado, fecha_respuesta)
   SELECT DISTINCT 
@@ -656,43 +634,256 @@ BEGIN TRANSACTION
   JOIN DB_2025.Estado_Inscripcion e ON e.estado = m.Inscripcion_Estado
   WHERE m.Inscripcion_Numero IS NOT NULL
 
-COMMIT
-
-EXECUTE DB_2025.migrar_provincia
-EXECUTE DB_2025.migrar_localidad
-EXECUTE DB_2025.migrar_institucion
-EXECUTE DB_2025.migrar_sede
-EXECUTE DB_2025.migrar_categoria
-EXECUTE DB_2025.migrar_turno
-EXECUTE DB_2025.migrar_profesor
-EXECUTE DB_2025.migrar_alumno
-EXECUTE DB_2025.migrar_curso
-EXECUTE DB_2025.migrar_dia
-EXECUTE DB_2025.migrar_curso_dia
-EXECUTE DB_2025.migrar_modulo
-EXECUTE DB_2025.migrar_estado_inscripcion
-EXECUTE DB_2025.migrar_inscripcion
-
-select * from DB_2025.Provincia
-select * from DB_2025.Localidad
-select * from DB_2025.Institucion
-select * from DB_2025.Sede
-select * from DB_2025.Categoria
-select * from DB_2025.Turno
-select * from DB_2025.Profesor
-select * from DB_2025.Alumno
-select * from DB_2025.Estado_Inscripcion
-
-select count(distinct m.Alumno_Dni) as dni_distintos from gd_esquema.Maestra m
-select count(distinct m.Alumno_Telefono) as telefonos_distinto from gd_esquema.Maestra m
-select count(distinct a.legajo) legajos_distintos from DB_2025.Alumno a
-select count(distinct m.Alumno_Legajo) from gd_esquema.Maestra m
-select count(distinct m.Alumno_Mail) as mails_distintos from gd_esquema.Maestra m
-select count(*) from gd_esquema.Maestra m where exists (select 1 from gd_esquema.Maestra m2 where m2.Alumno_Legajo != m.Alumno_Legajo and m2.Alumno_Mail = m.Alumno_Mail)
-select * from DB_2025.Curso
-select * from DB_2025.Dia
-select * from DB_2025.Curso_Dia
-select * from DB_2025.Inscripcion
-select count(distinct m.Inscripcion_Numero) from gd_esquema.Maestra m
-select count(i.nro_inscripcion) from DB_2025.Inscripcion i
+END;
 GO
+
+CREATE PROCEDURE DB_2025.migrar_evaluacion AS
+BEGIN
+
+    INSERT INTO DB_2025.Evaluacion (id_modulo, alumno_legajo, nota, fecha, instancia, presente)
+    SELECT DISTINCT 
+    m.id_modulo AS id_modulo, 
+    ma.Alumno_Legajo AS alumno_legajo, 
+    ma.Evaluacion_Curso_Nota AS nota, 
+    ma.Evaluacion_Curso_fechaEvaluacion AS fecha, 
+    ma.Evaluacion_Curso_Instancia AS instancia,
+    ma.Evaluacion_Curso_Presente AS presente
+    FROM gd_esquema.Maestra ma 
+    JOIN DB_2025.Modulo m ON m.nombre =  ma.Modulo_Nombre AND m.codigo_curso = ma.Curso_Codigo
+    JOIN DB_2025.Alumno a ON a.legajo = ma.Alumno_Legajo
+    WHERE ma.Evaluacion_Curso_fechaEvaluacion IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_trabajo_practico AS
+BEGIN
+
+    INSERT INTO DB_2025.Trabajo_Practico (legajo_alumno, codigo_curso, nota, fecha_evaluacion)
+    SELECT DISTINCT 
+    a.legajo AS legajo, 
+    c.codigo_curso AS codigo_curso, 
+    m.Trabajo_Practico_Nota AS nota, 
+    m.Trabajo_Practico_FechaEvaluacion AS fecha_evaluacion
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Alumno a ON a.legajo = m.Alumno_Legajo
+    JOIN DB_2025.Curso c ON c.codigo_curso = m.Curso_Codigo
+    WHERE m.Trabajo_Practico_FechaEvaluacion IS NOT NULL
+    AND m.Trabajo_Practico_Nota IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_instancia_final AS
+BEGIN
+
+    INSERT INTO DB_2025.Instancia_Final (codigo_curso, fecha_final, hora_final)
+    SELECT DISTINCT
+    c.codigo_curso AS codigo_curso, 
+    m.Examen_Final_Fecha AS fecha_final, 
+    m.Examen_Final_Hora AS hora_final
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Curso c ON c.codigo_curso = m.Curso_Codigo 
+    WHERE m.Examen_Final_Fecha IS NOT NULL
+    AND m.Examen_Final_Hora IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_evaluacion_final AS
+BEGIN
+
+    INSERT INTO DB_2025.Evaluacion_Final (id_profesor, id_instancia, legajo_alumno, nota, presente, descripcion)
+    SELECT DISTINCT 
+    p.id_profesor AS id_profesor,
+    i.id_instancia AS id_instancia, 
+    a.legajo AS legajo_alumno, 
+    m.Evaluacion_Final_Nota AS nota, 
+    m.Evaluacion_Final_Presente AS presente, 
+    m.Examen_Final_Descripcion AS descripcion
+    FROM gd_esquema.Maestra m 
+    JOIN DB_2025.Profesor p ON p.dni = m.Profesor_Dni AND p.nombre = m.Profesor_Nombre AND p.apellido = m.Profesor_Apellido AND p.mail = m.Profesor_Mail
+    JOIN DB_2025.Instancia_Final i ON m.Curso_Codigo = i.codigo_curso AND m.Examen_Final_Fecha = i.fecha_final AND m.Examen_Final_Hora = i.hora_final
+    JOIN DB_2025.Alumno a ON a.legajo = m.Alumno_Legajo
+    WHERE m.Evaluacion_Final_Presente IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_inscripcion_final AS
+BEGIN
+
+    INSERT INTO DB_2025.Inscripcion_Final (numero_inscripcion, legajo_alumno, id_instancia, fecha_inscripcion)
+    SELECT DISTINCT 
+    m.Inscripcion_Final_Nro AS numero_inscripcion, 
+    a.legajo AS legajo_alumno, 
+    i.id_instancia AS id_instancia, 
+    m.Inscripcion_Final_Fecha AS fecha_inscripcion
+    FROM gd_esquema.Maestra m 
+    JOIN DB_2025.Instancia_Final i ON m.Curso_Codigo = i.codigo_curso AND m.Examen_Final_Fecha = i.fecha_final
+    JOIN DB_2025.Alumno a ON a.legajo = m.Alumno_Legajo
+    WHERE m.Inscripcion_Final_Nro IS NOT NULL
+    AND m.Inscripcion_Final_Fecha IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_pregunta AS
+BEGIN
+
+    INSERT INTO DB_2025.Pregunta (pregunta_texto)
+    SELECT 
+    p.pregunta AS pregunta
+    FROM (
+        SELECT Encuesta_Pregunta1 AS pregunta FROM gd_esquema.Maestra
+        UNION 
+        SELECT Encuesta_Pregunta2 AS pregunta FROM gd_esquema.Maestra
+        UNION
+        SELECT Encuesta_Pregunta3 AS pregunta FROM gd_esquema.Maestra
+    ) p
+    WHERE p.pregunta IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_encuesta AS
+BEGIN
+
+    INSERT INTO DB_2025.Encuesta (codigo_curso, fecha_registro, observacion)
+    SELECT DISTINCT
+    c.codigo_curso codigo_curso, 
+    m.Encuesta_FechaRegistro AS fecha_registro, 
+    m.Encuesta_Observacion AS observacion
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Curso c ON c.codigo_curso = m.Curso_Codigo
+    WHERE m.Encuesta_FechaRegistro IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_respuesta AS
+BEGIN
+
+    INSERT INTO DB_2025.Respuesta (id_encuesta, id_pregunta, nota_dada)
+    SELECT DISTINCT e.id_encuesta, p.id_pregunta, m.Encuesta_Nota1 
+    FROM gd_esquema.Maestra m 
+    JOIN DB_2025.Encuesta e ON (m.Curso_Codigo = e.codigo_curso AND m.Encuesta_FechaRegistro = e.fecha_registro)
+    JOIN DB_2025.Pregunta p ON (m.Encuesta_Pregunta1 = p.pregunta_texto)
+    WHERE m.Encuesta_Nota1 IS NOT NULL
+    UNION 
+    SELECT DISTINCT e.id_encuesta, p.id_pregunta, m.Encuesta_Nota2 
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Encuesta e ON (m.Curso_Codigo = e.codigo_curso AND m.Encuesta_FechaRegistro = e.fecha_registro)
+    JOIN DB_2025.Pregunta p ON (m.Encuesta_Pregunta2 = p.pregunta_texto)
+    WHERE m.Encuesta_Nota2 IS NOT NULL
+    UNION
+    SELECT DISTINCT e.id_encuesta, p.id_pregunta, m.Encuesta_Nota3 
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Encuesta e ON (m.Curso_Codigo = e.codigo_curso AND m.Encuesta_FechaRegistro = e.fecha_registro)
+    JOIN DB_2025.Pregunta p ON (m.Encuesta_Pregunta3 = p.pregunta_texto)
+    WHERE m.Encuesta_Nota3 IS NOT NULL
+    UNION
+    SELECT DISTINCT e.id_encuesta, p.id_pregunta, m.Encuesta_Nota4 
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Encuesta e ON (m.Curso_Codigo = e.codigo_curso AND m.Encuesta_FechaRegistro = e.fecha_registro)
+    JOIN DB_2025.Pregunta p ON (m.Encuesta_Pregunta4 = p.pregunta_texto)
+    WHERE m.Encuesta_Nota4 IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_factura AS
+BEGIN
+
+    INSERT INTO DB_2025.Factura (numero_factura, fecha_emision, fecha_vencimiento, legajo_alumno, total)
+    SELECT DISTINCT 
+    m.Factura_Numero AS numero_factura, 
+    m.Factura_FechaEmision AS fecha_emision, 
+    m.Factura_FechaVencimiento AS fecha_vencimiento,
+    a.legajo AS legajo_alumno,
+    m.Factura_Total AS total
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Alumno a ON a.legajo = m.Alumno_Legajo
+    WHERE m.Factura_Numero IS NOT NULL
+    AND m.Detalle_Factura_Importe IS NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_detalle_factura AS
+BEGIN
+
+    INSERT INTO DB_2025.Detalle_Factura (numero_factura, codigo_curso, periodo_anio, periodo_mes, importe)
+    SELECT DISTINCT 
+    f.numero_factura AS numero_factura, 
+    c.codigo_curso AS codigo_curso,
+    m.Periodo_Anio AS periodo_anio,
+    m.Periodo_Mes AS periodo_mes, 
+    m.Detalle_Factura_Importe as importe
+    FROM gd_esquema.Maestra m 
+    JOIN DB_2025.Factura f ON f.numero_factura = m.Factura_Numero AND f.legajo_alumno = m.Alumno_Legajo
+    JOIN DB_2025.Curso c ON c.codigo_curso = m.Curso_Codigo
+    WHERE m.Detalle_Factura_Importe IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migrar_medio_pago AS
+BEGIN
+
+    INSERT INTO DB_2025.Medio_Pago (nombre_medio)
+    SELECT DISTINCT
+    m.Pago_MedioPago AS nombre_medio
+    FROM gd_esquema.Maestra m
+    WHERE m.Pago_MedioPago IS NOT NULL
+
+END;
+GO
+
+CREATE PROCEDURE DB_2025.migra_pago AS
+BEGIN
+
+    INSERT INTO DB_2025.Pago (numero_factura, fecha, importe, medio_pago)
+    SELECT DISTINCT 
+    f.numero_factura AS numero_factura, 
+    m.Pago_Fecha AS fecha, 
+    m.Pago_Importe AS importe,
+    mp.id_medio medio_pago
+    FROM gd_esquema.Maestra m
+    JOIN DB_2025.Factura f ON f.numero_factura = m.Factura_Numero AND f.legajo_alumno = m.Alumno_Legajo
+    JOIN DB_2025.Medio_Pago mp ON mp.nombre_medio = m.Pago_MedioPago
+    WHERE m.Pago_Importe IS NOT NULL
+
+END;
+GO
+
+BEGIN TRANSACTION
+
+    EXECUTE DB_2025.migrar_provincia
+    EXECUTE DB_2025.migrar_localidad
+    EXECUTE DB_2025.migrar_institucion
+    EXECUTE DB_2025.migrar_sede
+    EXECUTE DB_2025.migrar_categoria
+    EXECUTE DB_2025.migrar_turno
+    EXECUTE DB_2025.migrar_profesor
+    EXECUTE DB_2025.migrar_alumno
+    EXECUTE DB_2025.migrar_curso
+    EXECUTE DB_2025.migrar_dia
+    EXECUTE DB_2025.migrar_curso_dia
+    EXECUTE DB_2025.migrar_modulo
+    EXECUTE DB_2025.migrar_estado_inscripcion
+    EXECUTE DB_2025.migrar_inscripcion
+    EXECUTE DB_2025.migrar_evaluacion
+    EXECUTE DB_2025.migrar_trabajo_practico
+    EXECUTE DB_2025.migrar_instancia_final
+    EXECUTE DB_2025.migrar_evaluacion_final
+    EXECUTE DB_2025.migrar_inscripcion_final
+    EXECUTE DB_2025.migrar_pregunta
+    EXECUTE DB_2025.migrar_encuesta
+    EXECUTE DB_2025.migrar_respuesta
+    EXECUTE DB_2025.migrar_factura
+    EXECUTE DB_2025.migrar_detalle_factura
+    EXECUTE DB_2025.migrar_medio_pago
+    EXECUTE DB_2025.migra_pago
+
+COMMIT;
