@@ -362,50 +362,6 @@ CREATE TABLE DB_2025.Pago (
 );
 GO
 
--- Ubicación / Actores / Catálogos
-CREATE INDEX IX_Localidad_provincia      ON DB_2025.Localidad(provincia);
-CREATE INDEX IX_Sede_localidad           ON DB_2025.Sede(codigo_localidad);
-CREATE INDEX IX_Sede_cuit_institucion    ON DB_2025.Sede(cuit_institucion);
-CREATE INDEX IX_Profesor_localidad       ON DB_2025.Profesor(codigo_localidad);
-CREATE INDEX IX_Alumno_localidad         ON DB_2025.Alumno(codigo_localidad);
-
--- Cursos y estructura
-CREATE INDEX IX_Curso_profesor           ON DB_2025.Curso(profesor);
-CREATE INDEX IX_Curso_categoria          ON DB_2025.Curso(categoria);
-CREATE INDEX IX_Curso_sede               ON DB_2025.Curso(sede);
-CREATE INDEX IX_Modulo_codigo_curso      ON DB_2025.Modulo(codigo_curso);
-
--- Inscripciones y evaluación regular
-CREATE INDEX IX_Inscripcion_legajo       ON DB_2025.Inscripcion(legajo);
-CREATE INDEX IX_Inscripcion_curso        ON DB_2025.Inscripcion(codigo_curso);
-CREATE INDEX IX_Evaluacion_id_modulo     ON DB_2025.Evaluacion(id_modulo);
-CREATE INDEX IX_Evaluacion_alumno_legajo ON DB_2025.Evaluacion(alumno_legajo);
-CREATE INDEX IX_TP_legajo_alumno         ON DB_2025.Trabajo_Practico(legajo_alumno);
-CREATE INDEX IX_TP_codigo_curso          ON DB_2025.Trabajo_Practico(codigo_curso);
-
--- Finales / Instancias
-CREATE INDEX IX_InstanciaFinal_codigo_curso   ON DB_2025.Instancia_Final(codigo_curso);
-CREATE INDEX IX_EvalFinal_id_instancia        ON DB_2025.Evaluacion_Final(id_instancia);
-CREATE INDEX IX_EvalFinal_legajo_alumno       ON DB_2025.Evaluacion_Final(legajo_alumno);
-CREATE INDEX IX_InsFinal_id_instancia         ON DB_2025.Inscripcion_Final(id_instancia);
-CREATE INDEX IX_InsFinal_legajo_alumno        ON DB_2025.Inscripcion_Final(legajo_alumno);
-
--- Encuestas
-CREATE INDEX IX_Encuesta_codigo_curso    ON DB_2025.Encuesta(codigo_curso);
-CREATE INDEX IX_Respuesta_id_encuesta    ON DB_2025.Respuesta(id_encuesta);
-
--- Facturación
-CREATE INDEX IX_Factura_legajo_alumno    ON DB_2025.Factura(legajo_alumno);
-CREATE INDEX IX_DetalleFactura_codigo_curso  ON DB_2025.Detalle_Factura(codigo_curso);
-CREATE INDEX IX_Pago_numero_factura      ON DB_2025.Pago(numero_factura);
-CREATE INDEX IX_Pago_medio_pago          ON DB_2025.Pago(medio_pago)
-
-CREATE INDEX IX_Inscripcion_estado       ON DB_2025.Inscripcion(estado);
-CREATE INDEX IX_Curso_turno_curso        ON DB_2025.Curso(turno_curso);
-CREATE INDEX IX_Respuesta_id_pregunta    ON DB_2025.Respuesta(id_pregunta);
-CREATE INDEX IX_EvalFinal_id_profesor    ON DB_2025.Evaluacion_Final(id_profesor);
-GO
-
 ----------------------
 ------PROCEDURES------
 ----------------------
@@ -702,7 +658,7 @@ BEGIN
     m.Evaluacion_Final_Presente AS presente, 
     m.Examen_Final_Descripcion AS descripcion
     FROM gd_esquema.Maestra m 
-    JOIN DB_2025.Profesor p ON p.dni = m.Profesor_Dni AND p.nombre = m.Profesor_Nombre AND p.apellido = m.Profesor_Apellido AND p.mail = m.Profesor_Mail
+    JOIN DB_2025.Profesor p ON p.nombre = m.Profesor_nombre AND p.apellido = m.Profesor_Apellido AND p.mail = m.Profesor_Mail AND p.dni = m.Profesor_Dni
     JOIN DB_2025.Instancia_Final i ON m.Curso_Codigo = i.codigo_curso AND m.Examen_Final_Fecha = i.fecha_final AND m.Examen_Final_Hora = i.hora_final
     JOIN DB_2025.Alumno a ON a.legajo = m.Alumno_Legajo
     WHERE m.Evaluacion_Final_Presente IS NOT NULL
@@ -720,7 +676,7 @@ BEGIN
     i.id_instancia AS id_instancia, 
     m.Inscripcion_Final_Fecha AS fecha_inscripcion
     FROM gd_esquema.Maestra m 
-    JOIN DB_2025.Instancia_Final i ON m.Curso_Codigo = i.codigo_curso AND m.Examen_Final_Fecha = i.fecha_final
+    JOIN DB_2025.Instancia_Final i ON m.Curso_Codigo = i.codigo_curso AND m.Examen_Final_Fecha = i.fecha_final AND m.Examen_Final_Hora = i.hora_final
     JOIN DB_2025.Alumno a ON a.legajo = m.Alumno_Legajo
     WHERE m.Inscripcion_Final_Nro IS NOT NULL
     AND m.Inscripcion_Final_Fecha IS NOT NULL
@@ -821,7 +777,7 @@ BEGIN
     m.Periodo_Mes AS periodo_mes, 
     m.Detalle_Factura_Importe as importe
     FROM gd_esquema.Maestra m 
-    JOIN DB_2025.Factura f ON f.numero_factura = m.Factura_Numero AND f.legajo_alumno = m.Alumno_Legajo
+    JOIN DB_2025.Factura f ON f.numero_factura = m.Factura_Numero
     JOIN DB_2025.Curso c ON c.codigo_curso = m.Curso_Codigo
     WHERE m.Detalle_Factura_Importe IS NOT NULL
 
