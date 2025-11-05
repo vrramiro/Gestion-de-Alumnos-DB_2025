@@ -1,6 +1,9 @@
 /* =========================================================
 = = = = = = = =  0) LIMPIEZA / PREP DEL ESQUEMA  = = = = = =
 ========================================================= */
+USE GD2C2025
+GO
+
 
 -- Dropeo de procedures
 IF OBJECT_ID('DB_2025.migrar_provincia', 'P') IS NOT NULL DROP PROCEDURE DB_2025.migrar_provincia;
@@ -842,4 +845,4 @@ BEGIN TRANSACTION
     EXECUTE DB_2025.migrar_medio_pago
     EXECUTE DB_2025.migra_pago
 
-COMMIT;
+COMMIT TRANSACTION;
