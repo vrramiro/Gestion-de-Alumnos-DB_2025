@@ -48,3 +48,19 @@ select * from DB_2025.Inscripcion
 select count(distinct m.Inscripcion_Numero) from gd_esquema.Maestra m
 select count(i.nro_inscripcion) from DB_2025.Inscripcion i
 GO
+
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Tiempo;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Alumno;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Profesor;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Sede;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Curso;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Medio_Pago;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Estado_Inscripcion;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Dim_Bloque_Satisfaccion;
+
+SELECT * FROM DB_2025_BI.BI_Hecho_Pago;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Hecho_Cursada;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Hecho_Inscripcion;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Hecho_Encuesta;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Hecho_Examen_Final;
+SELECT COUNT(*) FROM DB_2025_BI.BI_Hecho_Venta;
